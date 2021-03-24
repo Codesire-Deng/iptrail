@@ -1,3 +1,9 @@
+# private things
+private_config.h
+
+# CMake build
+build/
+
 # Prerequisites
 *.d
 
