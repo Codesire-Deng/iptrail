@@ -1,0 +1,11 @@
+#pragma once
+#ifndef PRIVATE_CONFIG
+#define PRIVATE_CONFIG
+
+#define TO_EMAIL "123456789@qq.com"
+#define FROM_EMAIL "987654321@163.com"
+#define SERVER_HOST "smtp.163.com"
+#define SERVER_PORT 25
+#define FROM_PASSWORD "AAAAAAAAAAAAAAAA"
+
+#endif
