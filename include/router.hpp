@@ -3,18 +3,14 @@
 #include "private_config.h"
 #include <string>
 
-class Token {
+class Router {
   public:
-    Token();
-    void login();
+    Router();
+    void reLogin();
+    string getIP();
 
   private:
-    struct LoginPost {
-        string username;
-        string password;
-        int logtype;
-        string nonce;
-    };
+
     const std::string key = ENC_KEY;
     const std::string iv = ENC_IV;
     const std::string diviceId = ENC_DEVICE_ID;
@@ -22,4 +18,6 @@ class Token {
     std::string oldPwd;
     void initNonce();
     void initOldPwd();
+    std::string token;
 };
+

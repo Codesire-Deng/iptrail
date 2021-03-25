@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10.0)
 # set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 
 # main.cpp -> main.exe （当然还需要链接各种库）
-add_executable(iptrail main.cpp email.cpp mybio.cpp token.cpp)
+add_executable(iptrail main.cpp email.cpp mybio.cpp router.cpp)
 # add_executable(ref ref.cpp)
 # add_executable(try try.cpp)
 # add_executable(mybio mybio.cpp)
@@ -15,7 +15,7 @@ add_executable(iptrail main.cpp email.cpp mybio.cpp token.cpp)
 # target_link_libraries(main PRIVATE common object)
 
 # 链接第三方库
-target_link_libraries(iptrail PRIVATE libcrypto libboost_json)
+target_link_libraries(iptrail PRIVATE libcrypto libboost_json-vc142-mt-gd-x64-1_75)
 
 # -------------------------------------------------
 # 到这里 Exe 已经生成完了。 接下来将运行时需要的文件复制一下

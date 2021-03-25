@@ -18,7 +18,7 @@ int main() {
         .send(Email::Protocol::SMTP);
 #endif
 
-    Token token;
+    Router token;
 
     return 0;
 }

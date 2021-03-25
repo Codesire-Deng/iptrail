@@ -97,9 +97,7 @@ bool Email::send(Protocol protocol) {
 bool Email::send_SMTP() {
     using namespace boost::asio;
     using namespace ip;
-    using std::cout;
-    using std::cerr;
-    using std::endl;
+    using std::cout, std::cerr, std::endl;
     using std::function;
     constexpr size_t MAX_RECV = 512;
     constexpr size_t MAX_SEND = 1500;
