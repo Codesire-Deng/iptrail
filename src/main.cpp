@@ -17,8 +17,7 @@ void checkIP(const boost::system::error_code &ec, steady_timer *t) {
     static bool isFirst = true;
     if (isFirst) {
         ifstream fin("ip.txt");
-        if (fin.good() && !fin.eof())
-            fin >> lastIP;
+        if (fin.good() && !fin.eof()) fin >> lastIP;
         fin.close();
     }
     Router router;
@@ -37,12 +36,12 @@ void checkIP(const boost::system::error_code &ec, steady_timer *t) {
     } else {
         // cout << "IPµØÖ·ÎÈ¶¨" << endl;
     }
-    t->expires_after(boost::asio::chrono::seconds(4));
+    t->expires_after(boost::asio::chrono::seconds(CHECK_INTERVAL_IN_SECOND));
     t->async_wait(boost::bind(checkIP, boost::asio::placeholders::error, t));
 }
 
 int main() {
- #ifdef PRIVATE_CONFIG1
+#ifdef here_is_Email_tutorial
     email.setToEmailAddress(TO_EMAIL)
         .setFromEmailAddress(FROM_EMAIL)
         .setFromEmailPassword(FROM_PASSWORD)

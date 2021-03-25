@@ -4,6 +4,9 @@ project(iptrail VERSION 0.1.0)
 # 指定C++标准
 set(CMAKE_CXX_STANDARD 17)
 
+# 当 --config DEBUG 时请打开此选项。链接DEBUG版本的库
+set(LIB_DEBUG ON)
+
 # define DEBUG
 add_definitions(-DDEBUG)    # 启用部分调试信息
 add_definitions(-D_CRT_SECURE_NO_WARNINGS) # 禁用MSVC关于fopen的编译警告

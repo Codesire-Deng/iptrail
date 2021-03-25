@@ -15,8 +15,13 @@ add_executable(iptrail main.cpp email.cpp mybio.cpp router.cpp)
 # target_link_libraries(main PRIVATE common object)
 
 # 链接第三方库
-target_link_libraries(iptrail PRIVATE libcrypto libboost_json-vc142-mt-gd-x64-1_75)
-
+if (WIN32)
+    if (LIB_DEBUG)
+        target_link_libraries(iptrail PRIVATE libcrypto libboost_json-vc142-mt-gd-x64-1_75)
+    else(LIB_DEBUG)
+        target_link_libraries(iptrail PRIVATE libcrypto libboost_json-vc142-mt-x64-1_75)
+    endif(LIB_DEBUG)
+endif(WIN32)
 # -------------------------------------------------
 # 到这里 Exe 已经生成完了。 接下来将运行时需要的文件复制一下
 # -------------------------------------------------
