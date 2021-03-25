@@ -16,6 +16,9 @@ Track IP from your routers under DHCP, via email.
 
 #### 依赖项
 - Boost
+  - Asio
+  - Beast
+  - Json
 - OpenSSL
 
 #### 开发进度
@@ -26,4 +29,4 @@ Track IP from your routers under DHCP, via email.
 
 ---
 
-朋友都看到这儿了，点个Star吧🎅
+朋友都看到这儿了，点个Star吧?9?1

@@ -8,4 +8,11 @@
 #define SERVER_PORT 25
 #define FROM_PASSWORD "AAAAAAAAAAAAAAAA"
 
+#define GATEWAY_IP "192.168.31.1"
+#define ENC_KEY "a1abaaaa32aacaaaa4aadaaaa0aaeaaf"
+#define ENC_IV "13011411191215111011181117111611"
+#define ENC_DEVICE_ID "68:68:68:68:68:68"
+#define ENC_ORIGIN_PWD "router_password"
+
+
 #endif

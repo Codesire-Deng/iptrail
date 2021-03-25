@@ -52,7 +52,8 @@
         "xutility": "cpp",
         "iomanip": "cpp",
         "array": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "*.ipp": "cpp"
     },
     "files.encoding": "gb18030",
     "files.autoGuessEncoding": true
