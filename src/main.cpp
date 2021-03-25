@@ -1,6 +1,6 @@
 #include <iostream>
 #include "email.hpp"
-#include "token.hpp"
+#include "router.hpp"
 #include "private_config.h"
 using namespace std;
 
@@ -18,7 +18,7 @@ int main() {
         .send(Email::Protocol::SMTP);
 #endif
 
-    Router token;
+    Router router;
 
     return 0;
 }
