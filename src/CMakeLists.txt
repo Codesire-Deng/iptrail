@@ -22,6 +22,11 @@ if (WIN32)
         target_link_libraries(iptrail PRIVATE libcrypto libboost_json-vc142-mt-x64-1_75)
     endif(LIB_DEBUG)
 endif(WIN32)
+
+if (UNIX)
+target_link_libraries(iptrail PRIVATE OpenSSL::Crypto Boost_json_LIBRARY_RELEASE)
+endif(UNIX)
+
 # -------------------------------------------------
 # 到这里 Exe 已经生成完了。 接下来将运行时需要的文件复制一下
 # -------------------------------------------------
