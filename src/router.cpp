@@ -123,3 +123,28 @@ void Router::reLogin() {
 
     stream.socket().shutdown(ip::tcp::socket::shutdown_both);
 }
+
+string Router::getIP() {
+    using namespace boost::asio;
+    using namespace boost::beast;
+    io_context io;
+    ip::tcp::resolver resolver(io);
+    tcp_stream stream(io);
+    auto const results =
+        resolver.resolve(GATEWAY_IP, std::to_string(GATEWAY_PORT));
+    stream.connect(results);
+
+    const string target = "/cgi-bin/luci/;stok="+token+"/api/xqnetwork/pppoe_status";
+    http::request<http::string_body> req{http::verb::get, target, 11};
+    req.set(http::field::host, GATEWAY_IP);
+    http::write(stream, req);
+
+    flat_buffer buffer;
+    http::response<http::string_body> res;
+    http::read(stream, buffer, res);
+
+    // std::cerr << res.body() << std::endl;
+
+    boost::json::value jv = boost::json::parse(res.body());
+    return boost::json::value_to<string>(jv.at("ip").at("address"));
+}

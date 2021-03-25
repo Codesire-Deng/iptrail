@@ -1,13 +1,48 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <boost/asio.hpp>
+#include <boost/bind/bind.hpp>
 #include "email.hpp"
 #include "router.hpp"
 #include "private_config.h"
 using namespace std;
 
-int main() {
-    Email email;
+using namespace boost::asio;
 
-#ifdef PRIVATE_CONFIG1
+Email email;
+
+void checkIP(const boost::system::error_code &ec, steady_timer *t) {
+    static string lastIP = "0.0.0.0";
+    static bool isFirst = true;
+    if (isFirst) {
+        ifstream fin("ip.txt");
+        if (fin.good() && !fin.eof())
+            fin >> lastIP;
+        fin.close();
+    }
+    Router router;
+    string currentIP = router.getIP();
+    if (lastIP != currentIP) {
+        cout << "IP地址变化：" << lastIP << " -> " << currentIP << endl;
+        if (SEND_ON_FIRST_TIME || !isFirst) {
+            email.setContent(currentIP);
+            email.send(Email::Protocol::SMTP);
+        }
+        lastIP = currentIP;
+        isFirst = false;
+        ofstream fout("ip.txt");
+        fout << currentIP;
+        fout.close();
+    } else {
+        // cout << "IP地址稳定" << endl;
+    }
+    t->expires_after(boost::asio::chrono::seconds(4));
+    t->async_wait(boost::bind(checkIP, boost::asio::placeholders::error, t));
+}
+
+int main() {
+ #ifdef PRIVATE_CONFIG1
     email.setToEmailAddress(TO_EMAIL)
         .setFromEmailAddress(FROM_EMAIL)
         .setFromEmailPassword(FROM_PASSWORD)
@@ -18,7 +53,17 @@ int main() {
         .send(Email::Protocol::SMTP);
 #endif
 
-    Router router;
+    email.setToEmailAddress(TO_EMAIL)
+        .setFromEmailAddress(FROM_EMAIL)
+        .setFromEmailPassword(FROM_PASSWORD)
+        .setServerHost(SERVER_HOST)
+        .setServerPort(SERVER_PORT)
+        .setSubject("IP地址变化");
+
+    io_context io;
+    steady_timer t(io, boost::asio::chrono::seconds(1));
+    t.async_wait(boost::bind(checkIP, boost::asio::placeholders::error, &t));
+    io.run();
 
     return 0;
 }

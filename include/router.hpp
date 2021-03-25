@@ -7,7 +7,7 @@ class Router {
   public:
     Router();
     void reLogin();
-    string getIP();
+    std::string getIP();
 
   private:
 
