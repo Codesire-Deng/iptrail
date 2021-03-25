@@ -4,6 +4,9 @@ private_config.h
 # CMake build
 build/
 
+# ²Î¿¼×ÊÁÏ
+ref/
+
 # Prerequisites
 *.d
 
