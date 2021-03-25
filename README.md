@@ -23,9 +23,9 @@ Track IP from your routers under DHCP, via email.
 
 #### 开发进度
 - [x] 使用 SMTP 发送任意邮件
-- [ ] 获取路由器的 Token
-- [ ] 向路由器发送 http 请求，获取 IP
-- [ ] 监控 IP 变动，及时发送邮件到指定地址
+- [x] 获取路由器的 Token
+- [x] 向路由器发送 http 请求，获取 IP
+- [x] 监控 IP 变动，及时发送邮件到指定地址
 
 ---
 
