@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10.0)
 
 # main.cpp -> main.exe （当然还需要链接各种库）
 add_executable(iptrail main.cpp email.cpp mybio.cpp router.cpp)
-# add_executable(ref ref.cpp)
+add_executable(ref ref.cpp)
 # add_executable(try try.cpp)
 # add_executable(mybio mybio.cpp)
 # add_executable(timesvr timesvr.cpp)
@@ -24,7 +24,9 @@ if (WIN32)
 endif(WIN32)
 
 if (UNIX)
-target_link_libraries(iptrail PRIVATE OpenSSL::Crypto Boost_json_LIBRARY_RELEASE)
+message("fuck ${Boost_JSON_LIBRARY_DEBUG}")
+message("fuck ${Boost_JSON_LIBRARY_RELEASE}")
+target_link_libraries(iptrail PRIVATE OpenSSL::Crypto ${Boost_JSON_LIBRARY_DEBUG} pthread)
 endif(UNIX)
 
 # -------------------------------------------------

@@ -3,6 +3,10 @@ private_config.h
 
 # CMake build
 build/
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+Makefile
 
 # ²Î¿¼×ÊÁÏ
 ref/

@@ -31,15 +31,6 @@ namespace RouterRequest {
         }
     };
 
-    namespace json = boost::json;
-
-    void tag_invoke(json::value_from_tag, json::value &jv, const LoginPost &c) {
-        jv = {
-            {"username", c.username},
-            {"password", c.password},
-            {"logtype", c.logtype},
-            {"nonce", c.nonce}};
-    }
 } // namespace RouterRequest
 
 Router::Router() {

@@ -23,7 +23,7 @@ void checkIP(const boost::system::error_code &ec, steady_timer *t) {
     Router router;
     string currentIP = router.getIP();
     if (lastIP != currentIP) {
-        cout << "IPµÿ÷∑±‰ªØ£∫" << lastIP << " -> " << currentIP << endl;
+        cout << "IPÂú∞ÂùÄÂèòÂåñÔºö" << lastIP << " -> " << currentIP << endl;
         if (SEND_ON_FIRST_TIME || !isFirst) {
             email.setContent(currentIP);
             email.send(Email::Protocol::SMTP);
@@ -34,7 +34,7 @@ void checkIP(const boost::system::error_code &ec, steady_timer *t) {
         fout << currentIP;
         fout.close();
     } else {
-        // cout << "IPµÿ÷∑Œ»∂®" << endl;
+        // cout << "IPÂú∞ÂùÄÁ®≥ÂÆö" << endl;
     }
     t->expires_after(boost::asio::chrono::seconds(CHECK_INTERVAL_IN_SECOND));
     t->async_wait(boost::bind(checkIP, boost::asio::placeholders::error, t));
@@ -57,7 +57,7 @@ int main() {
         .setFromEmailPassword(FROM_PASSWORD)
         .setServerHost(SERVER_HOST)
         .setServerPort(SERVER_PORT)
-        .setSubject("IPµÿ÷∑±‰ªØ");
+        .setSubject("IPÂú∞ÂùÄÂèòÂåñ");
 
     io_context io;
     steady_timer t(io, boost::asio::chrono::seconds(1));

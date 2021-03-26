@@ -1,6 +1,7 @@
 {
     "cmake.sourceDirectory": "${workspaceFolder}/.",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.cmakePath": "cmake",
     "files.associations": {
         ".clang-format": "yaml",
         "*.clang-format": "yaml",

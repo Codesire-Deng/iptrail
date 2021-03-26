@@ -111,7 +111,7 @@ bool Email::send_SMTP() {
 
     boost::system::error_code err;
 
-    // ½¨Á¢Á¬½Ó
+    // å»ºç«‹è¿æ¥
     try {
         connect(socket, endpoints);
         const size_t len = socket.read_some(buffer(recv_buf), err);
@@ -124,7 +124,7 @@ bool Email::send_SMTP() {
         }
     } catch (std::exception &e) { cerr << e.what() << endl; }
 
-    // ·¢ËÍÒ»´ÎÊı¾İ(send_buf) ²¢½ÓÊÕ»Ø¸´(recv_buf)
+    // å‘é€ä¸€æ¬¡æ•°æ®(send_buf) å¹¶æ¥æ”¶å›å¤(recv_buf)
     const auto SMTP_query = [&](const function<void()> &log_send,
                                 const function<void()> &log_recv) {
         write(socket, buffer(send_buf, strlen(send_buf)), err);
@@ -142,7 +142,7 @@ bool Email::send_SMTP() {
         memset(recv_buf, 0, sizeof(recv_buf));
     };
 
-    // ÓÃbase64¼ÓÃÜ£¬ÔÙ¼ÓÉÏ\r\n£¬´æÈësend_buf
+    // ç”¨base64åŠ å¯†ï¼Œå†åŠ ä¸Š\r\nï¼Œå­˜å…¥send_buf
     const auto encode = [&](const string_view content) {
         size_t len =
             base64Encode(content.data(), content.size(), false, send_buf);
@@ -150,13 +150,15 @@ bool Email::send_SMTP() {
     };
 
     // EHLO
-    sprintf_s(send_buf, "EHLO Codesire-dzf\r\n");
+    // sprintf_s(send_buf, "EHLO Codesire-dzf\r\n");
+    sprintf(send_buf, "EHLO Codesire-dzf\r\n");
     SMTP_query(
         [] { cout << "EHLO ... " << endl; },
         [=] { cout << "EHLO receive: " << recv_buf << endl; });
 
     // AUTH LOGIN
-    sprintf_s(send_buf, "AUTH LOGIN\r\n");
+    // sprintf_s(send_buf, "AUTH LOGIN\r\n");
+    sprintf(send_buf, "AUTH LOGIN\r\n");
     SMTP_query(
         [] { cout << "Auth ... " << endl; },
         [=] { cout << "Auth Login Receive: " << recv_buf << endl; });
@@ -174,31 +176,36 @@ bool Email::send_SMTP() {
         [=] { cout << "Send Password Receive: " << recv_buf << endl; });
 
     // MAIL FROM
-    sprintf_s(send_buf, "MAIL FROM: <%s>\r\n", fromEmailAddress.data());
+    // sprintf_s(send_buf, "MAIL FROM: <%s>\r\n", fromEmailAddress.data());
+    sprintf(send_buf, "MAIL FROM: <%s>\r\n", fromEmailAddress.data());
     SMTP_query(
         [] { cout << "Mail From ..." << endl; },
         [=] { cout << "set Mail From Receive: " << recv_buf << endl; });
 
-    // RCPT TO µÚÒ»¸öÊÕ¼şÈË
-    sprintf_s(send_buf, "RCPT TO:<%s>\r\n", toEmailAddress.data());
+    // RCPT TO ç¬¬ä¸€ä¸ªæ”¶ä»¶äºº
+    // sprintf_s(send_buf, "RCPT TO:<%s>\r\n", toEmailAddress.data());
+    sprintf(send_buf, "RCPT TO:<%s>\r\n", toEmailAddress.data());
     SMTP_query(
         [] { cout << "Send To ..." << endl; },
         [=] { cout << "set Send To Receive: " << recv_buf << endl; });
 
-    // DATA ×¼±¸¿ªÊ¼·¢ËÍÓÊ¼şÄÚÈİ
-    sprintf_s(send_buf, "DATA\r\n");
+    // DATA å‡†å¤‡å¼€å§‹å‘é€é‚®ä»¶å†…å®¹
+    // sprintf_s(send_buf, "DATA\r\n");
+    sprintf(send_buf, "DATA\r\n");
     SMTP_query(
         [] { cout << "Prepare to send ..." << endl; },
         [=] { cout << "Prepare Receive: " << recv_buf << endl; });
 
-    // ·¢ËÍÓÊ¼şÄÚÈİ
-    sprintf_s(send_buf, "%s\r\n.\r\n", content.data());
+    // å‘é€é‚®ä»¶å†…å®¹
+    // sprintf_s(send_buf, "%s\r\n.\r\n", content.data());
+    sprintf(send_buf, "%s\r\n.\r\n", content.data());
     SMTP_query(
         [] { cout << "Sending content ..." << endl; },
         [=] { cout << "Send Mail Receive: " << recv_buf << endl; });
 
     // QUIT
-    sprintf_s(send_buf, "QUIT\r\n");
+    // sprintf_s(send_buf, "QUIT\r\n");
+    sprintf(send_buf, "QUIT\r\n");
     SMTP_query(
         [] { cout << "Quit ..." << endl; },
         [=] { cout << "Quit Receive: " << recv_buf << endl; });
