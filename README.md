@@ -1,32 +1,33 @@
 # iptrail
 
-#### ����
+#### 介绍
 For the time being, it is only for MIWiFi (AX6).
-Ŀǰ����Ժ���·����AX6��
+目前仅针对红米路由器AX6。
 
 Track IP from your routers under DHCP, via email.
-ͨ���ʼ�����·����DHCP�����WAN��IP��ַ��
+通过邮件监视路由器DHCP分配的WAN口IP地址。
 
 
 
-#### ΪʲôҪ���� iptrail
-ĳ��Уһ��ȡ����̬IP������DHCP�������������˱��ϡ�
+#### 为什么要开发 iptrail
+某高校一舍取消静态IP，改用DHCP。许多服务器因此报废。
 
-������Ҫһ���ȶ����ֶ�����ʱ֪Ϥ·������IP��ַ���Ա�Զ�̷��ʣ��ָ��������ı���ԡ�
+我们需要一种稳定的手段来随时知悉路由器的IP地址，以便远程访问，恢复服务器的便捷性。
 
-#### ������
+#### 依赖项
 - Boost
   - Asio
   - Beast
   - Json
 - OpenSSL
 
-#### ��������
-- [x] ʹ�� SMTP ���������ʼ�
-- [x] ��ȡ·������ Token
-- [x] ��·�������� http ���󣬻�ȡ IP
-- [x] ��� IP �䶯����ʱ�����ʼ���ָ����ַ
+#### 开发进度
+- [x] 使用 SMTP 发送任意邮件
+- [x] 获取路由器的 Token
+- [x] 向路由器发送 http 请求，获取 IP
+- [x] 监控 IP 变动，及时发送邮件到指定地址
+- [x] 适配树莓派4B
 
 ---
 
-���Ѷ���������ˣ����Star��?9?1
+朋友都看到这儿了，点个Star吧 🎅
