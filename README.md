@@ -33,7 +33,7 @@ Track IP from your routers under DHCP, via email.
 
 
 #### 特别鸣谢
-酷安大佬 [@乔念奴] 对查询WAN口IP的技术建议。
+酷安大佬 [@乔念奴](https://www.coolapk.com/u/792901) 对查询WAN口IP的技术建议。
 
 ---
 
